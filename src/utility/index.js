@@ -4,6 +4,10 @@ export const setToken = (t) => {
     window.localStorage.setItem(token, t)
 }
 
+export const getToken = () => {
+    return window.localStorage.getItem(token);
+}
+
 export const logout = () => {
     localStorage.removeItem(token);
 }
