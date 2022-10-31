@@ -2,6 +2,7 @@ import { BrowserRouter, Switch } from "react-router-dom";
 import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+import { Route, Redirect } from 'react-router-dom';
 
 import { ToastContainer } from 'react-toastify';
 import Login from './components/web/Login.Component/Login.Component';
@@ -23,6 +24,7 @@ function App() {
       <Provider store={createStore(reducer, {}, applyMiddleware(reduxThunk))}>
         <BrowserRouter>
           <Switch>
+            <Route path='/' exact render={props => <Redirect to='/login' />} />
             <PublicRoute restricted={false} path='/login' component={Login} />
             <PrivateRoute exact path='/dashboard' component={Dashboard} />
           </Switch>

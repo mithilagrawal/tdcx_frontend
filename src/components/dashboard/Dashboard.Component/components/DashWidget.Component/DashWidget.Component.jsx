@@ -25,11 +25,10 @@ const DashWidget = () => {
                     <span className='latest-task-created'>Latest Task Created</span>
                     <ul className='latest-task-created-list'>
                         {selector?.dashboardData?.dashboardData?.latestTasks?.map((item, idx) =>
-                            item?.completed ? <>
+                            item?.completed ?
                                 <li key={idx} className='task-item-comp'>{item?.name}</li>
-                            </> : <>
+                                :
                                 <li key={idx} className='task-item-n-comp'>{item?.name}</li>
-                            </>
                         )}
                     </ul>
                 </div>
