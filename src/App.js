@@ -11,8 +11,13 @@ import PrivateRoute from "./router/privateRoute";
 
 import 'react-toastify/dist/ReactToastify.css';
 import reducer from "./reducer";
-// import './static/css/bootstrap.css';
+import { useEffect } from "react";
+import './App.css';
 function App() {
+  useEffect(() => {
+    // 👇️ set style on body element
+    document.body.classList.add('body-css');
+  }, [])
   return (
     <>
       <Provider store={createStore(reducer, {}, applyMiddleware(reduxThunk))}>

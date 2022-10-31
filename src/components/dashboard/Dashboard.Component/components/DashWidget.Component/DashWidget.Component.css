@@ -24,10 +24,10 @@
 .task-item-comp {
     color: #537178;
     text-decoration-line: line-through;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .task-item-n-comp {
-    font-size: 14;
+    font-size: 16px;
     color: #8F9EA2;
 }

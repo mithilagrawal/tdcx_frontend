@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom';
 import { apiRequest } from "../../../utility/api";
 import { toast } from 'react-toastify';
 import './Login.Component.css';
-import { setToken } from "../../../utility";
+import { setData, setToken } from "../../../utility";
 
 const Login = () => {
     const history = useHistory();
@@ -16,7 +16,9 @@ const Login = () => {
         e.preventDefault();
         apiRequest.post('/login', form)
             .then(res => {
+
                 setToken(res?.data?.token?.token);
+                setData('name',res?.data?.token?.name);
                 history.replace('/dashboard');
                 toast.success('Successfully login');
             })

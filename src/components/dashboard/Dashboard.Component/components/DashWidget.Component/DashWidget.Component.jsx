@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { PieChart } from "react-minimal-pie-chart"
 
@@ -6,25 +6,21 @@ import './DashWidget.Component.css';
 
 const DashWidget = () => {
     const selector = useSelector(state => state);
-
-    useEffect(() => {
-        console.log("use eff", selector)
-    }, [selector])
     return (
         <div className="wid-head">
-            <div className="wid-card">
+            <div className="wid-card wild-card-one">
                 <div style={{ padding: '24px' }}>
                     <span className='wid-task-complete'>Task Completed</span>
                     <div className='wid-task-complete-count'>
                         <span className='wid-task-comp-count'>
-                            {selector?.dashboardData?.dashboardData?.taskCompleted || 0}
+                            {selector?.dashboardData?.dashboardData?.tasksCompleted || 0}
                         </span>
                         {' '}
                         {`/ ${selector?.dashboardData?.dashboardData?.totalTasks || 0}`}
                     </div>
                 </div>
             </div>
-            <div className="wid-card">
+            <div className="wid-card wild-card-two">
                 <div style={{ padding: '24px' }}>
                     <span className='latest-task-created'>Latest Task Created</span>
                     <ul className='latest-task-created-list'>
@@ -38,7 +34,7 @@ const DashWidget = () => {
                     </ul>
                 </div>
             </div>
-            <div className="wid-card">
+            <div className="wid-card wild-card-three">
                 <div style={{ padding: '24px' }}>
                     <PieChart
                         style={{ height: "100px" }}

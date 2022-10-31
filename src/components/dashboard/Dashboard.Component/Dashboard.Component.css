@@ -114,17 +114,26 @@
 
 @media screen and (min-width: 40em) {
     .wid-head {
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-        flex-direction: column;
         padding-left: 128px;
         padding-right: 128px;
     }
 
     .wid-card {
+
         width: 100%;
     }
 
+    .wild-card-one{
+        margin-right: 10px;
+    }
+
+    .wild-card-two{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .wild-card-three{
+        margin-left: 10px;
+    }
     .task-action {
         -webkit-box-pack: end;
         -webkit-justify-content: flex-end;

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 
 import './Dashboard.Component.css';
 
@@ -11,38 +10,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { apiRequest } from '../../../utility/api';
 import { taskListItem } from '../../../reducer/taskListData/taskList.action';
 import { dashboardItem } from '../../../reducer/dashboardData/dashboard.action';
+import { modalEnableAction, modalSetDataAction } from '../../../reducer/ModalActiob/modal.action';
 const Dashboard = () => {
-
-    const [viewModal, setViewModal] = useState(false);
-
     const selector = useSelector(state => state);
     const dispatch = useDispatch();
+    const [searchValue, setSearchValue] = useState();
 
-    const [name, setName] = useState();
 
-    const newTaskSubmit = async () => {
-        apiRequest.post('/tasks', { name })
-            .then(res => {
-                if (res?.status == 200) {
-                    getTasksList();
-                }
-                setViewModal(false);
-                setName();
-
-            })
-            .catch(err => {
-                toast.error("Something went wrong");
-            })
-    }
 
     const getTasksList = async () => {
         const res = await apiRequest.get('/tasks');
         if (res?.data) {
-            console.log("res data task", res?.data?.length)
             dispatch(taskListItem(res?.data));
-            if (res?.data?.length <= 0 && !viewModal) {
-                setName();
-                setViewModal(true);
+            if (res?.data?.length <= 0 && !selector?.modal?.modalEnable) {
+                enableModal();
             }
         }
     }
@@ -50,13 +31,17 @@ const Dashboard = () => {
     const getDashboardData = async () => {
         const res = await apiRequest.get('/dashboard');
         if (res?.data) {
-            console.log("res data dashboard", res?.data)
             dispatch(dashboardItem(res?.data));
-            if (res?.data?.totalTasks == 0 && !viewModal) {
-                setName();
-                setViewModal(true);
+            if (res?.data?.totalTasks == 0 && !selector?.modal?.modalEnable) {
+                // setName();
+                enableModal();
             }
         }
+    }
+
+    const enableModal = () => {
+        dispatch(modalEnableAction(true));
+        dispatch(modalSetDataAction({ getData }));
     }
 
     const getData = () => {
@@ -81,22 +66,17 @@ const Dashboard = () => {
 
                     {/* Task action - begin */}
                     <div className='task-action'>
-                        <input placeholder='search by task name' className='search-input' />
-                        <button onClick={() => setViewModal(true)} className='btn-add-task'>+ Add New Task</button>
+                        <input placeholder='search by task name' onInput={e => setSearchValue(e.target.value)} className='search-input' />
+                        <button onClick={() => enableModal()} className='btn-add-task'>+ Add New Task</button>
                     </div>
                     {/* Task action - done */}
 
                     {/* Task list table - begin*/}
-                    <TasksList />
+                    <TasksList getData={getData} searchValue={searchValue} setSearchValue={setSearchValue} />
                     {/* Task list table - done */}
                 </> : <></>}
             </div>
-            <Modal view={viewModal}>
-                <p>+ New Task</p>
-                <input placeholder='Task Name' value={name} onInput={e => setName(e.target.value)} className="search-input" style={{ marginTop: "32px", width: '276px' }} />
-                <button onClick={() => newTaskSubmit()} className='btn-add-task' style={{ marginLeft: "0px", marginRight: '0px', width: '100%' }}>+ New Task</button>
-            </Modal>
-
+            <Modal />
         </>
     )
 
