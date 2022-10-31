@@ -1,0 +1,33 @@
+.wid-task-complete {
+    font-size: 20px;
+    color: #537178;
+}
+
+.wid-task-complete-count {
+    font-size: 20px;
+}
+
+.wid-task-comp-count {
+    font-size: 64px;
+    color: #537178;
+}
+
+.latest-task-created {
+    font-size: 20px;
+    color: #537178;
+}
+
+.latest-task-created-list {
+    padding-left: 24px;
+}
+
+.task-item-comp {
+    color: #537178;
+    text-decoration-line: line-through;
+    font-size: 14px;
+}
+
+.task-item-n-comp {
+    font-size: 14;
+    color: #8F9EA2;
+}

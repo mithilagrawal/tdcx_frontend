@@ -2,10 +2,28 @@
     background: #ffffff 0% 0% no-repeat padding-box;
     box-shadow: 0px 3px 6px #00000029;
     opacity: 1;
-    background: white;
     height: 72px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    padding: 0px 0px;
+    -webkit-box-align: center;
+    -webkit-box-pack: justify;
+}
+
+@media screen and (min-width: 40em) {
+    .header {
+        padding-left: 128px;
+        padding-right: 128px;
+    }
+}
+
+.logout {
+    padding: 24px 0px;
+    cursor: pointer;
+}
+
+.userName {
+    padding: 24px 0px;
 }
