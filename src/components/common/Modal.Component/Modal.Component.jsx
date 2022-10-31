@@ -31,7 +31,7 @@ const Modal = () => {
             new: { api: `/tasks`, method: 'post', data: { name } }
         }
 
-        apiRequest[submitTask[modalData?.mode].method](submitTask[modalData?.mode].api, submitTask[modalData?.mode].data)
+        apiRequest()[submitTask[modalData?.mode].method](submitTask[modalData?.mode].api, submitTask[modalData?.mode].data)
             .then(res => {
                 console.log({ res })
                 setName();

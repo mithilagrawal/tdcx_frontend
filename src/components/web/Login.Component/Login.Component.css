@@ -1,7 +1,5 @@
 .cont {
     min-height: 100vh;
-    -webkit-box-align: center;
-    -webkit-box-pack: center;
     align-items: center;
     justify-content: center;
     display: flex;
@@ -18,8 +16,6 @@
     flex-direction: column;
     display: flex;
     background: white;
-    -webkit-box-align: center;
-    -webkit-box-pack: center;
 }
 
 .heading {

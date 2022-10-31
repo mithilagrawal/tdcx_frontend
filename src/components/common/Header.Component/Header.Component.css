@@ -8,8 +8,6 @@
     align-items: center;
     justify-content: space-between;
     padding: 0px 0px;
-    -webkit-box-align: center;
-    -webkit-box-pack: justify;
 }
 
 @media screen and (min-width: 40em) {

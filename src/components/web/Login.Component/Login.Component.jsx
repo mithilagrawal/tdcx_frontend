@@ -14,7 +14,7 @@ const Login = () => {
 
     const formSubmit = async e => {
         e.preventDefault();
-        apiRequest.post('/login', form)
+        apiRequest().post('/login', form)
             .then(res => {
 
                 setToken(res?.data?.token?.token);

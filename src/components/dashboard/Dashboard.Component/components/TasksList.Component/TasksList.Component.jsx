@@ -46,7 +46,7 @@ const TasksList = (props) => {
             delete: { method: 'delete', data: {} }
         }
 
-        apiRequest[actionType[type].method](`/tasks/${id}`, actionType[type].data).then(res => {
+        apiRequest()[actionType[type].method](`/tasks/${id}`, actionType[type].data).then(res => {
             if (res?.status == 200) {
                 props?.getData();
             }

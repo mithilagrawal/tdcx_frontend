@@ -19,7 +19,7 @@ const Dashboard = () => {
 
 
     const getTasksList = async () => {
-        const res = await apiRequest.get('/tasks');
+        const res = await apiRequest().get('/tasks');
         if (res?.data) {
             dispatch(taskListItem(res?.data));
             if (res?.data?.length <= 0 && !selector?.modal?.modalEnable) {
@@ -29,7 +29,7 @@ const Dashboard = () => {
     }
 
     const getDashboardData = async () => {
-        const res = await apiRequest.get('/dashboard');
+        const res = await apiRequest().get('/dashboard');
         if (res?.data) {
             dispatch(dashboardItem(res?.data));
             if (res?.data?.totalTasks == 0 && !selector?.modal?.modalEnable) {
@@ -50,7 +50,9 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
-        getData();
+        setTimeout(() => {
+            getData();
+        }, 200);
         // eslint-disable-next-line
     }, []);
 
