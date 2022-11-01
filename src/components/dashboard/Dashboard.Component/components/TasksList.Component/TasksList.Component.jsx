@@ -9,6 +9,7 @@ import './TasksList.Component.css';
 import { modalEnableAction, modalSetDataAction } from '../../../../../reducer/ModalActiob/modal.action';
 
 const TasksList = (props) => {
+    // get the task data from the redux store
     const selector = useSelector(state => state?.taskData);
     const dispatch = useDispatch();
     const [taskList, setTaskList] = useState([]);
@@ -20,10 +21,11 @@ const TasksList = (props) => {
 
     useEffect(() => {
         taskListFunc();
+        // eslint-disable-next-line
     }, [selector]);
 
 
-
+    //this use effect is use for search the task
     useEffect(() => {
         if (props?.searchValue) {
             const serVal = selector?.taskList?.filter(item => (item?.name?.indexOf(props?.searchValue) > -1));
@@ -35,9 +37,11 @@ const TasksList = (props) => {
         } else {
             taskListFunc();
         }
+        // eslint-disable-next-line
     }, [props])
 
 
+    //for edit and delete the task
     const taskAction = (e, id, type) => {
         e.preventDefault();
 
@@ -47,7 +51,7 @@ const TasksList = (props) => {
         }
 
         apiRequest()[actionType[type].method](`/tasks/${id}`, actionType[type].data).then(res => {
-            if (res?.status == 200) {
+            if (res?.status === 200) {
                 props?.getData();
             }
         }).catch(
@@ -58,6 +62,7 @@ const TasksList = (props) => {
 
     }
 
+    //for edit the task
     const editItemData = (e, id, name) => {
         e.preventDefault();
 
@@ -80,7 +85,7 @@ const TasksList = (props) => {
                         taskList?.length > 0 ?
                             <>
                                 {taskList?.map((item, idx) =>
-                                    <div className='task-list-table-content' key={idx}>
+                                    <div className={`task-list-table-content ${idx + 1 < taskList?.length ? 'border-bottom' : ''}`} key={idx}>
                                         <>
                                             <input type='checkbox' onChange={e => taskAction(e, item.id, 'complete')} className='task-item-completed-checkbox' checked={item?.completed} />
                                         </>

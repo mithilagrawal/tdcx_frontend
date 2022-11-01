@@ -17,6 +17,13 @@
     }
 }
 
+@media screen and (max-width: 40em) {
+    .header {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
 .logout {
     padding: 24px 0px;
     cursor: pointer;
@@ -24,4 +31,15 @@
 
 .userName {
     padding: 24px 0px;
+    display: flex;
+    flex-direction: row;
+}
+
+.userName img{
+    position: relative; 
+    width: 40px; 
+    height: 40px; 
+    overflow: hidden;
+    border-radius: 50%;
+    padding-right: 10px;
 }

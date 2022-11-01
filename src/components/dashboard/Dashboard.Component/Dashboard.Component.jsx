@@ -17,33 +17,29 @@ const Dashboard = () => {
     const [searchValue, setSearchValue] = useState();
 
 
-
+    //fetch the task list from the backend
     const getTasksList = async () => {
         const res = await apiRequest().get('/tasks');
         if (res?.data) {
             dispatch(taskListItem(res?.data));
-            if (res?.data?.length <= 0 && !selector?.modal?.modalEnable) {
-                enableModal();
-            }
         }
     }
 
+    //fetch the dashbaord data
     const getDashboardData = async () => {
         const res = await apiRequest().get('/dashboard');
         if (res?.data) {
             dispatch(dashboardItem(res?.data));
-            if (res?.data?.totalTasks == 0 && !selector?.modal?.modalEnable) {
-                // setName();
-                enableModal();
-            }
         }
     }
 
+    //enable modal for create new task
     const enableModal = () => {
         dispatch(modalEnableAction(true));
         dispatch(modalSetDataAction({ getData }));
     }
 
+    //fetch the task and dashboard data from the backend
     const getData = () => {
         getTasksList();
         getDashboardData();
@@ -69,14 +65,26 @@ const Dashboard = () => {
                     {/* Task action - begin */}
                     <div className='task-action'>
                         <input placeholder='search by task name' onInput={e => setSearchValue(e.target.value)} className='search-input' />
-                        <button onClick={() => enableModal()} className='btn-add-task'>+ Add New Task</button>
+                        <button onClick={() => enableModal()} className='btn-add-task btn-large'>+ Add New Task</button>
                     </div>
                     {/* Task action - done */}
 
                     {/* Task list table - begin*/}
                     <TasksList getData={getData} searchValue={searchValue} setSearchValue={setSearchValue} />
                     {/* Task list table - done */}
-                </> : <></>}
+                </> : <>
+                    {
+                        // this section call when there is no task avail into the database
+                        selector?.modal?.modalEnable ? <></> :
+
+                            <div className='no-task-cont'>
+                                <div className='no-task-card'>
+                                    <p className="no-task-heading">You Have No Task</p>
+                                    <button onClick={() => enableModal()} className='btn-add-task btn-small'>+ New Task</button>
+                                </div>
+                            </div>
+                    }
+                </>}
             </div>
             <Modal />
         </>

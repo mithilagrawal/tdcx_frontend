@@ -1,3 +1,43 @@
+.search-input {
+    padding: 12px;
+    margin: 4px 0px;
+    background: #d9dfeb;
+    border: none;
+    border-radius: 8px;
+    width: 244px;
+    font-size: 14px;
+    text-align: center;
+}
+
+
+
+.task-list-table-head {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 32px;
+}
+
+.task-list-table {
+    min-height: 78px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #0000000a;
+    opacity: 1;
+    margin: 8px 0px 0px 0px;
+    border-radius: 12px;
+}
+
+.no-data-found {
+    min-height: 75px;
+    border-bottom: 1px solid #e8e8e8;
+    margin-left: 16px;
+    align-items: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+
 .task-item-completed-checkbox {
     /* Layout Properties */
     top: 363px;
@@ -14,14 +54,18 @@
 
 .task-list-table-content {
     min-height: 75px;
-    border-bottom: 1px solid #e8e8e8;
+    /* border-bottom: 1px solid #e8e8e8; */
     margin-left: 16px;
     align-items: center;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     flex-direction: row;
     margin-right: 2%;
 
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e8e8e8;
 }
 
 .task-pending {
@@ -36,20 +80,24 @@
     letter-spacing: 0px;
     color: #5285EC;
     opacity: 1;
+    margin-right: auto;
+    padding-left: 5px;
     width: '0.75px 0.8px'
 }
 
 .task-completed {
-     /* Layout Properties */
-     top: 435px;
-     left: 175px;
-     /* width: 386px; */
-     height: 24px;
-     /* UI Properties */
-     text-align: left;
-     font: normal normal medium 20px/24px Montserrat;
-     letter-spacing: 0px;
+    /* Layout Properties */
+    top: 435px;
+    left: 175px;
+    /* width: 386px; */
+    height: 24px;
+    /* UI Properties */
+    text-align: left;
+    font: normal normal medium 20px/24px Montserrat;
+    letter-spacing: 0px;
     color: #537178;
+    margin-right: auto;
+    padding-left: 5px;
     text-decoration-line: line-through;
 }
 
@@ -65,4 +113,11 @@
     justify-content: center;
     align-items: center;
     padding-top: 3px;
+}
+
+@media screen and (min-width: 40em) {
+    .task-list-table-head {
+        padding-left: 128px;
+        padding-right: 128px;
+    }
 }
