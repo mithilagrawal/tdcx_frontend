@@ -11,7 +11,7 @@ export const apiRequest = () => {
         headers['authorization'] = `Bearer ${getToken()}`;
     }
     return axios.create({
-        baseURL: 'http://localhost:3092/api',
+        baseURL: 'https://tdcs-backend.herokuapp.com/api',
         headers
     });
 }
