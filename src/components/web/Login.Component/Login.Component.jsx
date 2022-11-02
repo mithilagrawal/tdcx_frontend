@@ -41,7 +41,7 @@ const Login = () => {
                             name: e.target.value
                         });
                     }} placeholder="Name" />
-                    <input className="form-input" type="text" onInput={e => {
+                    <input className="form-input" type="password" onInput={e => {
                         setForm({
                             ...form,
                             apiKey: e.target.value

@@ -28,26 +28,30 @@ const Modal = () => {
 
     //close the modal and create the data from the redux state
     const submitAct = () => {
-        //disable the modal in redux store
-        dispatch(modalEnableAction(false));
+
         //create the data from the redux store
         dispatch(modalSetDataAction({}));
+        //disable the modal in redux store
+        dispatch(modalEnableAction(false));
     }
 
-    
+
     const taskReqSubmit = async () => {
         const modalData = selector?.modalData;
         const submitTask = {
             edit: { api: `/tasks/${modalData?.id}`, method: 'put', data: { name } },
-            new: { api: `/tasks`, method: 'post', data: { name } }
+            new: { api: `/tasks`, method: 'post', data: { name } },
+            delete: { api: `/tasks/${modalData?.id}`, method: 'delete', data: {} }
         }
 
         apiRequest()[submitTask[modalData?.mode].method](submitTask[modalData?.mode].api, submitTask[modalData?.mode].data)
             .then(res => {
                 console.log({ res })
-                setName();
-
+                setName('');
                 if (res?.status === 200) {
+                    if (modalData?.mode == 'delete') {
+                        toast.success('Task deleted successfully')
+                    }
                     selector?.modalData?.getData();
                 }
                 submitAct();
@@ -64,10 +68,19 @@ const Modal = () => {
                 <div className="modal">
                     <div className="modal-container">
                         <div className="modal-body">
-                            <p>{selector?.modalData?.mode === 'edit' ? 'Edit Task' : '+ New Task'}</p>
-                            <input placeholder='Task Name' value={name || ''} onInput={e => setName(e.target.value)} className="search-input" style={{ marginTop: "32px", width: '276px' }} />
-                            <button onClick={() => taskReqSubmit()} className='btn-add-task btn-large' style={{ marginLeft: "0px", marginRight: '0px', width: '100%' }}>
-                                {selector?.modalData?.mode === 'edit' ? 'Edit Task' : '+ New Task'}</button>
+                            <div>
+                                <p className='modal-title'>{selector?.modalData?.mode !== 'delete' ? (selector?.modalData?.mode === 'edit' ? 'Edit Task' : '+ New Task') : 'Delete Task'}</p>
+
+                                {
+                                    selector?.modalData?.mode !== 'delete' ?
+                                        <input placeholder='Task Name' value={name || ''} onInput={e => setName(e.target.value)} className="search-input" style={{ marginTop: "32px", width: '276px' }} />
+                                        : <span>Would you like to delete the task : <b>{selector?.modalData?.name}</b></span>
+                                }
+
+                                <button onClick={() => taskReqSubmit()} className='btn-add-task btn-large' style={{ marginLeft: "0px", marginRight: '0px', width: '100%' }}>
+                                    {selector?.modalData?.mode !== 'delete' ? (selector?.modalData?.mode === 'edit' ? 'Edit Task' : '+ New Task') : 'Delete Task'}</button>
+                            </div>
+                            <div onClick={e => submitAct()}><span>x</span></div>
                         </div>
                     </div>
                 </div>

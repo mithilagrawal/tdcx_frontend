@@ -28,7 +28,7 @@ const TasksList = (props) => {
     //this use effect is use for search the task
     useEffect(() => {
         if (props?.searchValue) {
-            const serVal = selector?.taskList?.filter(item => (item?.name?.indexOf(props?.searchValue) > -1));
+            const serVal = selector?.taskList?.filter(item => (item?.name.toString().toLowerCase()?.indexOf(props?.searchValue.toString().toLowerCase()) > -1));
             if (serVal?.length > 0) {
                 setTaskList(serVal);
             } else {
@@ -62,8 +62,9 @@ const TasksList = (props) => {
 
     }
 
+
     //for edit the task
-    const editItemData = (e, id, name) => {
+    const taskEditDeleteAction = (e, id, name, mode) => {
         e.preventDefault();
 
         dispatch(modalEnableAction(true));
@@ -71,7 +72,7 @@ const TasksList = (props) => {
             id,
             name,
             getData: props?.getData,
-            mode: 'edit'
+            mode
         }));
     }
 
@@ -99,8 +100,8 @@ const TasksList = (props) => {
                                             }
                                         </>
                                         <div className='task-action-edi-del'>
-                                            <div style={{ 'cursor': 'pointer' }} onClick={e => editItemData(e, item?.id, item?.name)}> <PencilIcon width={30} height={30} /></div>
-                                            <div style={{ 'cursor': 'pointer' }} onClick={e => taskAction(e, item.id, 'delete')}> <TrashIcon width={30} height={30} /></div>
+                                            <div style={{ 'cursor': 'pointer' }} onClick={e => taskEditDeleteAction(e, item?.id, item?.name, 'edit')}> <PencilIcon width={30} height={30} /></div>
+                                            <div style={{ 'cursor': 'pointer' }} onClick={e => taskEditDeleteAction(e, item?.id, item?.name, 'delete')}> <TrashIcon width={30} height={30} /></div>
                                         </div>
                                     </div>
                                 )}
