@@ -46,7 +46,7 @@ const Login = () => {
                             ...form,
                             apiKey: e.target.value
                         });
-                    }} placeholder="Api Key" />
+                    }} placeholder="Password" />
                     <button className="btn" type="submit">Login</button>
                 </form>
             </div>
